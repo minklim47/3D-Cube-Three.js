@@ -8,6 +8,7 @@
 body {
     font-family: sans-serif;
     background: goldenrod;
+    overflow-x: hidden;
 }
 main {
     position: absolute;
@@ -24,17 +25,21 @@ canvas {
 section{
     height: 100vh;
     display: flex;
-    justify-content: center;
+    justify-content:flex-start;
     align-items: center;
-    scroll-snap-align: start;
+    margin-left: 10rem;
+    
+    
 }
 .container{
-    scroll-snap-type: y proximity;
-    overflow-y: scroll;
+    
     height: 100vh;
     width: 100vw;
 }
 
+h1{
+    font-size: 4rem;
+}
 .one{
   
 }

@@ -4,7 +4,7 @@ let container;
 let camera;
 let renderer;
 let scene;
-let tree;
+let cube;
 
 function init(){
     //select container from index.html
@@ -20,14 +20,14 @@ function init(){
     const far = 1000; //(meters) if further than this, we cannot see
 
     camera = new THREE.PerspectiveCamera(fov,aspect,near,far)
-    camera.position.set(0,500,500);
+    camera.position.set(-3.5,0,10);
 
     //light
     const ambient = new THREE.AmbientLight(0x404040, 3);
     scene.add(ambient);
 
-    const light = new THREE.DirectionalLight(0xffffff,5);
-    light.position.set(10,10,10);
+    const light = new THREE.DirectionalLight(0xffffff,4);
+    light.position.set(0,3,5);
     scene.add(light);
 
     //Renderer
@@ -40,16 +40,34 @@ function init(){
 
     //Load model
     let loader = new THREE.GLTFLoader();
-    loader.load('./tree/scene.gltf', function(gltf){
+    loader.load('./cube/scene.gltf', function(gltf){
         scene.add(gltf.scene);
-        tree = gltf.scene.children[0];
+        cube = gltf.scene;
+        cube.position.y = 0;
+        
         animate();
     });
+
+    function moveCamera() {
+        //Tell how far the user is from the top 
+        const t = document.body.getBoundingClientRect().top;
+      
+       
+        camera.position.y = t * 0.0002;
+       // camera.rotation.y = t * -0.0002;
+      
+      }
+      document.body.onscroll = moveCamera;
+      moveCamera()
 }
+
 
 function animate(){
     requestAnimationFrame(animate);
-    tree.rotation.z += 0.005;
+    
+    cube.rotation.y += 0.01;
+    //cube.rotation.z += 0.001;
+
     renderer.render(scene,camera);
 }
 
@@ -63,3 +81,4 @@ function onWindowResize(){
 }
 
 window.addEventListener('resize', onWindowResize);
+
