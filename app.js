@@ -17,7 +17,7 @@ function init(){
     const fov = 35;
     const aspect = container.clientWidth / container.clientHeight;
     const near = 0.1;
-    const far = 500;
+    const far = 1000; //(meters) if further than this, we cannot see
 
     camera = new THREE.PerspectiveCamera(fov,aspect,near,far)
     camera.position.set(0,500,500);
